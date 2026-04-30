@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import type { AppData } from '../../types'
+import { parseAppData } from '../../store/parseAppData'
 
 interface Props {
   data: AppData
@@ -24,17 +25,12 @@ export default function BackupPanel({ data, onImport }: Props) {
     if (!file) return
     const reader = new FileReader()
     reader.onload = ev => {
-      try {
-        const parsed = JSON.parse(ev.target?.result as string) as unknown
-        if (
-          typeof parsed !== 'object' || parsed === null ||
-          !Array.isArray((parsed as AppData).items) ||
-          !Array.isArray((parsed as AppData).entries)
-        ) throw new Error('Invalid format')
-        onImport(parsed as AppData)
+      const result = parseAppData(ev.target?.result as string)
+      if (result.ok) {
+        onImport(result.data)
         alert('Imported successfully!')
-      } catch (err) {
-        alert('Import failed: ' + (err as Error).message)
+      } else {
+        alert('Import failed: ' + result.reason)
       }
     }
     reader.readAsText(file)

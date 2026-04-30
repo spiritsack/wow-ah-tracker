@@ -1,5 +1,5 @@
 import type { PriceEntry } from '../../types'
-import { formatGsc } from '../../store/helpers'
+import { formatGsc } from '../../money'
 
 interface Props {
   items: string[]

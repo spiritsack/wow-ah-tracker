@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { copperToGsc } from '../store/helpers'
+import { copperToGsc } from '../money'
 
 interface Props {
   value: number | null

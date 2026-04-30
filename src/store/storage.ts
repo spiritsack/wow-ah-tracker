@@ -1,22 +1,14 @@
 import type { AppData, PriceEntry } from '../types';
+import { parseAppData } from './parseAppData';
 
 const KEY = 'wowAH';
 const EMPTY: AppData = { items: [], entries: [] };
 
 export function loadData(): AppData {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return EMPTY;
-    const parsed = JSON.parse(raw) as unknown;
-    if (
-      typeof parsed === 'object' && parsed !== null &&
-      Array.isArray((parsed as AppData).items) &&
-      Array.isArray((parsed as AppData).entries)
-    ) {
-      return parsed as AppData;
-    }
-  } catch (_) { /* corrupted — start fresh */ }
-  return EMPTY;
+  const raw = localStorage.getItem(KEY);
+  if (!raw) return EMPTY;
+  const result = parseAppData(raw);
+  return result.ok ? result.data : EMPTY;
 }
 
 export function saveData(data: AppData): void {

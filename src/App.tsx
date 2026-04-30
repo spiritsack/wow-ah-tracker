@@ -9,7 +9,7 @@ import {
   updateEntry,
   deleteEntry,
 } from './store/storage'
-import { uid } from './store/helpers'
+import { uid } from './store/id'
 import Sidebar from './components/Sidebar/Sidebar'
 import MainPanel from './components/MainPanel/MainPanel'
 

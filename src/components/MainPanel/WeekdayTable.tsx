@@ -1,5 +1,7 @@
 import type { PriceEntry } from '../../types'
-import { getWeekdayStats, formatGsc, WKORDER, DAY_FULL } from '../../store/helpers'
+import { getWeekdayStats } from '../../store/weekdayStats'
+import { WKORDER, DAY_FULL } from '../../store/time'
+import { formatGsc } from '../../money'
 
 interface Props {
   entries: PriceEntry[]

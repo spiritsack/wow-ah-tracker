@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { PriceEntry } from '../../types'
-import { nowDatetimeLocal } from '../../store/helpers'
+import { nowDatetimeLocal } from '../../store/time'
 import GscInput from '../GscInput'
 
 interface Props {
